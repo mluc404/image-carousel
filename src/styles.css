@@ -5,6 +5,7 @@ body {
 button {
   font-size: 2rem;
 }
+
 .frame {
   width: 200px;
   height: 200px;
@@ -20,16 +21,17 @@ img {
   /* visibility: hidden; */
   position: absolute;
   /* z-index: 1; */
+  /* position: relative; */
 }
 
 #cat {
-  z-index: 3;
+  z-index: 2;
 }
 
-#dog {
+/* #dog {
   z-index: 2;
 }
 
 #fish {
   z-index: 1;
-}
+} */
