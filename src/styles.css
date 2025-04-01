@@ -1,3 +1,35 @@
 body {
   background-color: skyblue;
 }
+
+button {
+  font-size: 2rem;
+}
+.frame {
+  width: 200px;
+  height: 200px;
+  border: red solid 2px;
+  overflow: hidden;
+}
+
+.slides {
+  position: relative;
+}
+
+img {
+  /* visibility: hidden; */
+  position: absolute;
+  /* z-index: 1; */
+}
+
+#cat {
+  z-index: 3;
+}
+
+#dog {
+  z-index: 2;
+}
+
+#fish {
+  z-index: 1;
+}
