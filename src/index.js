@@ -1,72 +1,81 @@
 import "./styles.css";
 
-console.log("testing");
-
-let btnForward = document.querySelector("#btnForward");
-let dog = document.querySelector("#dog");
-let fish = document.querySelector("#fish");
-let cat = document.querySelector("#cat");
-
-let imgs = document.querySelectorAll("img");
+const btnForward = document.querySelector("#btnForward");
+const btnBack = document.querySelector("#btnBackward");
+const cat = document.querySelector("#cat");
+const imgs = document.querySelectorAll("img");
 const imgsArr = new Array(imgs);
-console.log(imgs);
-console.log(imgsArr);
-let arr = [];
+const arr = [];
 imgs.forEach((img) => arr.push(img));
+const allCircles = document.querySelectorAll(".circle");
+let currentTopImg = cat;
 
 const moveNext = (arr) => {
-  let indxTop = arr.findIndex(
+  const indxTop = arr.findIndex(
     (img) => window.getComputedStyle(img).zIndex === "2"
   );
-  console.log(indxTop);
-
   imgs[indxTop].style.zIndex = 1;
-
-  if (indxTop === 2) {
-    imgs[0].style.zIndex = 2;
+  if (indxTop === arr.length - 1) {
+    currentTopImg = imgs[0];
+    currentTopImg.style.zIndex = 2;
   } else {
-    imgs[indxTop + 1].style.zIndex = 2;
+    currentTopImg = imgs[indxTop + 1];
+    currentTopImg.style.zIndex = 2;
   }
+  // Change coresponding circle color
+  checkBtnColor(currentTopImg);
 };
 
 const moveBack = (arr) => {
-  let indxTop = arr.findIndex(
+  const indxTop = arr.findIndex(
     (img) => window.getComputedStyle(img).zIndex === "2"
   );
-  console.log(indxTop);
   imgs[indxTop].style.zIndex = 1;
-
   if (indxTop === 0) {
-    imgs[2].style.zIndex = 2;
+    currentTopImg = imgs[arr.length - 1];
+    currentTopImg.style.zIndex = 2;
   } else {
-    imgs[indxTop - 1].style.zIndex = 2;
+    currentTopImg = imgs[indxTop - 1];
+    currentTopImg.style.zIndex = 2;
   }
+  // Change coresponding circle color
+  checkBtnColor(currentTopImg);
 };
-
-let clickCount = 0;
 
 btnForward.addEventListener("click", () => {
   moveNext(arr);
-  //   console.log(imgs[clickCount]);
-  //   const imgToTop = imgs[clickCount];
-  //   imgToTop.style.zIndex = 2;
-  //   imgs.forEach((img) => {
-  //     if (img !== imgs[clickCount]) img.style.zIndex = 1;
-  //   });
-  //   clickCount++;
-  //   if (clickCount === 3) clickCount = 0;
 });
 
-const btnBack = document.querySelector("#btnBackward");
-let clickCountBack = 2 - 1;
 btnBack.addEventListener("click", () => {
   moveBack(arr);
-  //   console.log(imgs[clickCountBack]);
-  //   const imgToTop = imgs[clickCountBack];
-  //   imgToTop.style.zIndex = 2;
-  //   imgs.forEach((img) => {
-  //     if (img !== imgs[clickCountBack]) img.style.zIndex = 1;
-  //   });
-  //   clickCountBack--;
-  //   if (clickCountBack === -1) clickCountBack = 2;
 });
+
+const btnFunction = (allCircles) => {
+  checkBtnColor(currentTopImg);
+
+  allCircles.forEach((circle) => {
+    circle.addEventListener("click", (e) => {
+      arr.forEach((img) => {
+        if (img.id === e.target.classList[1]) {
+          img.style.zIndex = 2;
+          currentTopImg = img;
+        } else {
+          img.style.zIndex = 1;
+        }
+      });
+      checkBtnColor(currentTopImg);
+    });
+  });
+};
+
+const checkBtnColor = (currentTopImg) => {
+  allCircles.forEach((circle) => {
+    if (circle.classList[1] === currentTopImg.id) {
+      circle.style.color = "orange";
+    } else {
+      circle.style.color = "black";
+    }
+  });
+};
+
+btnFunction(allCircles);

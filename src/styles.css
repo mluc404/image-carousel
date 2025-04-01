@@ -1,7 +1,13 @@
 body {
   background-color: skyblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.buttonDiv {
+  display: flex;
+}
 button {
   font-size: 2rem;
 }
@@ -18,20 +24,18 @@ button {
 }
 
 img {
-  /* visibility: hidden; */
   position: absolute;
-  /* z-index: 1; */
-  /* position: relative; */
 }
 
 #cat {
   z-index: 2;
 }
 
-/* #dog {
-  z-index: 2;
+.circleDiv {
+  display: flex;
+  gap: 5px;
 }
 
-#fish {
-  z-index: 1;
-} */
+.circle:hover {
+  cursor: pointer;
+}
